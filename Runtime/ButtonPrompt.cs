@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 using Log = Freyja.ButtonPrompts.DebugLog.DebugLog;
@@ -60,19 +61,32 @@ namespace Freyja.ButtonPrompts
 
         #endregion
 
+        #region Properties
+
+        public UnityEvent<InputDeviceType> UpdateButtonPrompt { get; private set; } = new UnityEvent<InputDeviceType>();
+
+        #endregion
+
         #region Methods
 
         private void OnEnable()
         {
             m_InputDeviceTypeEvent.OnDeviceEvent.AddListener(OnDeviceChanged);
+            UpdateButtonPrompt.AddListener(UpdatePrompt);
         }
 
         private void OnDisable()
         {
-            m_InputDeviceTypeEvent.OnDeviceEvent.AddListener(OnDeviceChanged);
+            m_InputDeviceTypeEvent.OnDeviceEvent.RemoveListener(OnDeviceChanged);
+            UpdateButtonPrompt.RemoveListener(UpdatePrompt);
         }
 
         private void OnDeviceChanged(InputDeviceType inputDeviceType)
+        {
+            UpdatePrompt(inputDeviceType);
+        }
+
+        private void UpdatePrompt(InputDeviceType inputDeviceType)
         {
             if (m_DataAsset == null || m_Text == null)
             {
@@ -89,11 +103,7 @@ namespace Freyja.ButtonPrompts
 
             m_Icon.sprite = prompt.Icon;
 
-            SetPromptName(m_DataAsset.Value.Name);
-        }
-
-        private void SetPromptName(string promptName)
-        {
+            var promptName = m_DataAsset.Value.Name;
             if (m_Text.text == promptName)
             {
                 return;
