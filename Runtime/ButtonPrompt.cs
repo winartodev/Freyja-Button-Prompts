@@ -1,9 +1,10 @@
+#if UNITY_EDITOR && ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 using System.Linq;
 
 using Freyja.ButtonPrompts.DataAsset;
 using Freyja.InputSystem;
-
-using Sirenix.OdinInspector;
 
 using TMPro;
 
@@ -29,33 +30,33 @@ namespace Freyja.ButtonPrompts
 
         #region Fields
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(ConfigGrp)]
         [Required]
-    #endif
+        #endif
         [SerializeField]
         private InputDeviceTypeEvent m_InputDeviceTypeEvent = null;
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(DataAssetGrp)]
         [InlineEditor]
         [Required]
         [OnValueChanged(nameof(OnValueChangeButtonPromptDataAsset))]
-    #endif
+        #endif
         [SerializeField]
         private ButtonPromptDataAsset m_DataAsset;
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(UIGrp)]
         [Required]
-    #endif
+        #endif
         [SerializeField]
         private Image m_Icon;
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(UIGrp)]
         [Required]
-    #endif
+        #endif
         [SerializeField]
         private TextMeshProUGUI m_Text;
 
@@ -114,14 +115,14 @@ namespace Freyja.ButtonPrompts
 
         private void Reset()
         {
-        #if UNITY_EDITOR
+            #if UNITY_EDITOR
             m_InputDeviceTypeEvent = GetComponent<InputDeviceTypeEvent>();
             GetIconComponent();
             GetIconTextComponent();
-        #endif
+            #endif
         }
 
-    #if UNITY_EDITOR
+        #if UNITY_EDITOR
 
         private void OnValueChangeButtonPromptDataAsset()
         {
@@ -192,7 +193,7 @@ namespace Freyja.ButtonPrompts
             return newGameObject.GetComponent<T>();
         }
 
-    #endif
+        #endif
 
         #endregion
     }

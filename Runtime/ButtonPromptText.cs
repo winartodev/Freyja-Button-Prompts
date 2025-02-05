@@ -1,9 +1,10 @@
-﻿using System.Text.RegularExpressions;
+﻿#if UNITY_EDITOR && ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
+using System.Text.RegularExpressions;
 
 using Freyja.ButtonPrompts.DataAsset;
 using Freyja.InputSystem;
-
-using Sirenix.OdinInspector;
 
 using TMPro;
 
@@ -30,29 +31,29 @@ namespace Freyja.ButtonPrompts
 
         #region Fields
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(ConfigGrp)]
-    #endif
+        #endif
         [SerializeField]
         private InputDeviceTypeEvent m_InputDeviceTypeEvent;
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(DataAssetGrp)]
-    #endif
+        #endif
         [SerializeField]
         private ButtonPromptTextDataAsset m_DataAsset;
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(UIGrp)]
-    #endif
+        #endif
         [SerializeField]
         private TextMeshProUGUI m_TextMeshProUGUI;
 
-    #if UNITY_EDITOR && ODIN_INSPECTOR
+        #if UNITY_EDITOR && ODIN_INSPECTOR
         [TitleGroup(TextGrp)]
         [HideLabel]
         [TextArea(4, 10)]
-    #endif
+        #endif
         [SerializeField]
         private string m_Text;
 
@@ -117,7 +118,7 @@ namespace Freyja.ButtonPrompts
 
         private void Reset()
         {
-        #if UNITY_EDITOR
+            #if UNITY_EDITOR
 
             if (m_TextMeshProUGUI == null)
             {
@@ -129,7 +130,7 @@ namespace Freyja.ButtonPrompts
                 m_InputDeviceTypeEvent = GetComponent<InputDeviceTypeEvent>();
             }
 
-        #endif
+            #endif
         }
 
         #endregion
