@@ -144,7 +144,8 @@ namespace Freyja.ButtonPrompts
                 m_Text.text = m_DataAsset.Value.Name;
             }
 
-            gameObject.name = $"ButtonPrompt_{m_DataAsset.Value.Name}";
+            var promptName = m_DataAsset.Value.Name.Trim().Replace(" ", "");
+            gameObject.name = $"ButtonPrompt_{promptName}";
         }
 
         private void GetIconComponent()
